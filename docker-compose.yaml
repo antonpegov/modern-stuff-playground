@@ -7,3 +7,39 @@ services:
       - 80:80
     volumes:
       - ./src:/usr/local/apache2/htdocs # линк локальной директории с рабочей папкой Апача
+  postgres:
+    image: postgres:10-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: apidb
+    restart: always
+  mysql:
+    image: mysql:8.0.3
+    environment:
+        MYSQL_ROOT_PASSWORD: pass
+        MYSQL_DATABASE: mydb
+    restart: always
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: pass
+    restart: always
+  mongo-seed:
+    build: ./seed/mongo-seed
+    links:
+      - mongo
+  admin:
+    depends_on: 
+      - postgres
+      - mongo
+      - mysql
+    image: dockette/adminer:full
+    ports:
+      - 8080:80
+    restart: always
