@@ -1,12 +1,16 @@
 version: '3'
 
 services:
+  # apache:
+  #   image: httpd:2.4
+  #   ports:
+  #     - 80:80
+  #   volumes:
+  #     - ./src:/usr/local/apache2/htdocs # линк локальной директории с рабочей папкой Апача
   apache:
-    image: httpd:2.4
+    build: ./src
     ports:
       - 80:80
-    volumes:
-      - ./src:/usr/local/apache2/htdocs # линк локальной директории с рабочей папкой Апача
   postgres:
     image: postgres:10-alpine
     ports:
