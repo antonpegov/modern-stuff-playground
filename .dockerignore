@@ -1,0 +1,8 @@
+# Git
+.git
+.gitignore
+
+# App
+**/node_modules/*
+**/dist/*
+**/build/*

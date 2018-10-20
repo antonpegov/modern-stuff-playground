@@ -1,0 +1,42 @@
+{
+  "author": "Anton Pegov <antonpegov@gmail.com>",
+  "name": "modern-stuff-playground-server",
+  "license": "MIT",
+  "main": "index.ts",
+  "version": "0.0.1",
+  "scripts":{
+    "build": "npm run clean && npm run build-server",
+    "clean": "rm -rf build && mkdir build",
+    "staging": "node ./build/server.js",
+    "start": "npm run build && npm run staging",
+    "buildWin": "npm run cleanWin && npm run build-server",
+    "cleanWin": "IF EXIST build rmdir /q /s build && mkdir build",
+    "stagingWin": "cross-env NODE_ENV=staging NODE_PATH=./build node ./build/index.js",
+    "startWin": "npm run buildWin && npm run stagingWin",
+
+    "start:debug": "ts-node --inspect=5858 --debug-brk --ignore false src/index.ts"
+  },
+  "dependencies": {
+    "config": "^2.0.1",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.6.1",
+    "koa": "^2.5.3",
+    "koa-bodyparser": "^4.2.1",
+    "koa-favicon": "^2.0.1",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "mongoose": "^5.3.1",
+    "mongoose-plugin-autoinc": "^1.1.9"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.0.46",
+    "@types/koa-router": "^7.0.32",
+    "@types/node": "^10.11.7",
+    "chai": "^4.2.0",
+    "eslint-config-google": "^0.10.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.4",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.2"
+  }
+}

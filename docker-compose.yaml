@@ -8,9 +8,15 @@ services:
   #   volumes:
   #     - ./src:/usr/local/apache2/htdocs # линк локальной директории с рабочей папкой Апача
   apache:
-    build: ./src
+    build: ./docs
+    container_name: antonpegov/koa-server-docs
     ports:
       - 80:80
+  server:
+    build: .server
+    container_name: antonpegov/koa-server
+    ports:
+      - 8000:8000
   postgres:
     image: postgres:10-alpine
     ports:

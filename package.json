@@ -1,7 +1,10 @@
 {
-  "name": "modern-stuff-playground",
-  "version": "1.0.0",
-  "main": "index.js",
   "author": "Anton Pegov <antonpegov@gmail.com>",
-  "license": "MIT"
+  "name": "modern-stuff-playground",
+  "license": "MIT",
+  "repository": "https://github.com/antonpegov/modern-stuff-playground.git",
+  "version": "0.0.1",
+  "scripts": {
+    "dockerize:server": "docker build -t antonpegov/koa-typesctipt-server ./server"
+  }
 }
