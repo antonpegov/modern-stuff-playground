@@ -56,5 +56,22 @@
         "port": 9229,
         "internalConsoleOptions": "openOnSessionStart"
     },
+    {
+      "type": "node",
+      "request": "launch",
+      "internalConsoleOptions": "openOnSessionStart",
+      "name": "Debug Tests with Watch",
+      "outFiles": [],
+      "outputCapture": "std",
+      "port": 9229,
+      "protocol": "inspector",
+      "restart": true,
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+          "run-script",
+          "watch:test:debug"
+      ],
+      "sourceMaps": true,
+  },
   ]
 }

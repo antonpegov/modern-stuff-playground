@@ -15,6 +15,7 @@
     "startWin": "npm run buildWin && npm run stagingWin",
     "start:debug": "node -r ts-node/register --inspect-brk=5858 src/index.ts",
     "test:debug": "mocha --inspect-brk --timeout 1000 -r ts-node/register src/**/*.spec.ts",
+    "test:watch": "nodemon -e ts,tsx --exec mocha -r ts-node/register src/**/*.spec.ts",
     "watch:debug": "nodemon --inspect=5858 -e ts,tsx --exec node -r ts-node/register ./src/index.ts",
     "watch": "nodemon -e ts,tsx --exec ts-node ./src/index.ts"
   },
