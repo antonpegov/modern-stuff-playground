@@ -1,6 +1,6 @@
-import server from '../';
+import { Server } from 'http';
 
-export default async () => {
+export default async (server: Server) => {
   return new Promise(async (resolve, reject) => {
     try {
       // Empty yet...

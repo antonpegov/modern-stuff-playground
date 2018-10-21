@@ -1,6 +1,8 @@
-# About this Repo
+# Playground
 
-It is my playground in wich I working on few tasks:
+[![MIT License][license-badge]][license]
+
+Here I working on few tasks:
 1. Transform our Koa backend from ES6 to TypeScript.
 2. Practice use Active Record vs Data Mapper patterns with differnt SQL/noSQL databases.
 3. Cover all that new (for me) stuff with tests and deploy with dockerization.
