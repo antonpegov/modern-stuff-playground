@@ -1,0 +1,60 @@
+{
+  "configurations": [
+    {
+      "name": "Debug with ts-node",
+      "type": "node",
+      "request": "launch",
+      "args": ["src/index.ts"],
+      "outputCapture": "std",
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector",
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "Debug Current TS File",
+      "type": "node",
+      "request": "launch",
+      "args": ["${relativeFile}"],
+      "runtimeArgs": ["-r", "ts-node/register"],
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector",
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "Debug Current TS Tests File",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+      "args": ["-r", "ts-node/register", "${relativeFile}"],
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector",
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "Attach to Process",
+      "type": "node",
+      "request": "attach",
+      "restart": true,
+      "port": 5858,
+      "outFiles": [],
+      "sourceMaps": true
+    },
+    {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug Tests",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": [
+            "run-script",
+            "test:debug"
+        ],
+        "outFiles": [],
+        "outputCapture": "std",
+        "protocol": "inspector",
+        "sourceMaps": true,
+        "port": 9229,
+        "internalConsoleOptions": "openOnSessionStart"
+    },
+  ]
+}

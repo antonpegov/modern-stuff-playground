@@ -3,7 +3,7 @@ ehthumbs.db
 Icon?
 Thumbs.db
 .idea
-.vscode
+#.vscode
 
 # Node Files #
 node_modules
@@ -16,6 +16,7 @@ npm-debug.log
 /tsd_typings/
 
 # Dist #
+.ts-node
 /dist/
 /build/
 /__build__/**
