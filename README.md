@@ -1,6 +1,7 @@
 # Playground
 
-[![MIT License][license-badge]][license]
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 
 Here I working on few tasks:
 1. Transform our Koa backend from ES6 to TypeScript.
