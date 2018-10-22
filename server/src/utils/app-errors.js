@@ -24,4 +24,4 @@ function AppError(httpError, appError, errors) {
 AppError.prototype = Object.create(Error.prototype);
 AppError.prototype.constructor = AppError;
 
-export default AppError;
+module.exports = AppError;

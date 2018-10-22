@@ -1,9 +1,11 @@
 import AppError from '../../../utils/app-errors.js';
-import Tag from '../models/api-event.model';
-import Source from '../models/user-event.model';
+import { ApiEventModel, IApiEventModel } from '../models/api-event.model';
+import { UserEventModel, IUserEventModel } from '../models/user-event.model';
+import ApiEvent from '../models/api-event.js';
+import { Model, Document } from 'mongoose';
 
-const properties = ['tag', 'source'];
-const collections = [Tag, Source];
+const properties = ['api', 'user'];
+const collections = [ApiEventModel, UserEventModel];
 
 const getType = (arr, prop) => {
   const allNumbers = arr.every((el) => (!isNaN(Number(el))));
@@ -16,9 +18,9 @@ const unType = (type) => {
     : type.replace('ID', '');
 };
 
-const add = async (ctx, collection) => {
-  const prop = properties[collection];
-  const Collection = collections[collection];
+const add = async (ctx, collectionId) => {
+  const prop = properties[collectionId];
+  const Collection: Model<Document> = collections[collectionId];
   if (ctx.request.header['content-type']!='application/json' &&
     ctx.request.header['content-type']!='application/x-www-form-urlencoded') throw new AppError(400, 10);
   if (!ctx.request.body[prop]) throw new AppError(406, 601);
@@ -27,14 +29,14 @@ const add = async (ctx, collection) => {
   if (!propParsed.every((el) => (isNaN(Number(el))))) throw new AppError(406, 602);
   return await Promise.all(
       propParsed.map(async (el) => (
-        await Collection.findOneOrCreate({[prop]: el})
+        await Collection.create({[prop]: el})
       ))
   );
 };
 
-const del = async (ctx, collection) => {
-  const prop = properties[collection];
-  const Collection = collections[collection];
+const del = async (ctx, collectionId) => {
+  const prop = properties[collectionId];
+  const Collection: Model<Document> = collections[collectionId];
   if (ctx.request.header['content-type']!='application/json' &&
     ctx.request.header['content-type']!='application/x-www-form-urlencoded') throw new AppError(400, 10);
   if (!ctx.request.body[prop]) throw new AppError(406, 601);
@@ -44,9 +46,9 @@ const del = async (ctx, collection) => {
   return await Collection.deleteMany({[type]: propParsed});
 };
 
-const find = async (ctx, collection) => {
-  const prop = properties[collection];
-  const Collection = collections[collection];
+const find = async (ctx, collectionId) => {
+  const prop = properties[collectionId];
+  const Collection: Model<Document> = collections[collectionId];
   if (ctx.request.header['content-type']!='application/json' &&
     ctx.request.header['content-type']!='application/x-www-form-urlencoded') throw new AppError(400, 10);
   if (!ctx.request.body[prop]) throw new AppError(406, 601);
@@ -57,9 +59,9 @@ const find = async (ctx, collection) => {
   return preRet.map((el) => (el[unType(type)]));
 };
 
-const edit = async (ctx, collection) => {
-  const prop = properties[collection];
-  const Collection = collections[collection];
+const edit = async (ctx, collectionId) => {
+  const prop = properties[collectionId];
+  const Collection: Model<Document> = collections[collectionId];
   if (ctx.request.header['content-type']!='application/json' &&
     ctx.request.header['content-type']!='application/x-www-form-urlencoded') throw new AppError(400, 10);
   if (!ctx.request.body[prop]) throw new AppError(406, 601);
@@ -69,9 +71,9 @@ const edit = async (ctx, collection) => {
   return await Collection.update({ [prop]: propParsed[0] }, { [prop]: propParsed[1] });
 };
 
-const all = async (ctx, collection) => {
-  const prop = properties[collection];
-  const Collection = collections[collection];
+const all = async (ctx, collectionId) => {
+  const prop = properties[collectionId];
+  const Collection: Model<Document> = collections[collectionId];
   const findRequest = (ctx.params.include)
     ? { [prop]: new RegExp(ctx.params.include, 'i') }
     : {};
@@ -87,9 +89,9 @@ const all = async (ctx, collection) => {
 
 const mocked = async (ctx, collection) => {
   return [
-    {name: 'Test 1', date: Date.now()},
-    {name: 'Test 2', date: Date.now()},
-    {name: 'Test 3', date: Date.now()},
+    {title: 'Test 1', date: Date.now()},
+    {title: 'Test 2', date: Date.now()},
+    {title: 'Test 3', date: Date.now()},
   ];
 };
 

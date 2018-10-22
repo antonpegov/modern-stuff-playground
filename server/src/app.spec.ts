@@ -3,7 +3,6 @@ import app from './app';
 import * as sinon from 'sinon';
 import * as chai from 'chai';
 import * as sinonChai from 'sinon-chai';
-import { Server } from 'http';
 
 const expect = chai.expect;
 chai.use(sinonChai);
@@ -23,6 +22,6 @@ describe('App module test', () => {
       expect(spies[0]).to.be.calledOnceWith(server);
       expect(spies[1]).to.be.calledOnce;
       expect(app.use).to.be.calledOnceWith(spies[2]);
-    }
+    });
   });
 });
